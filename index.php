@@ -30,9 +30,15 @@
 var i_read = setInterval(mysql_read, 1000);
 var i_write = setInterval(mysql_write, 2000);
 var data;
+var read_lock=0;
+var write_lock=0;
+
 
 function mysql_read() {
-  $.ajax({
+  console.log("read_lock = " + read_lock)
+  if (read_lock == 0) {
+    read_lock = 1;
+    $.ajax({
       type: "GET",
       dataType: "json",
       url: "reads.php",
@@ -49,12 +55,20 @@ function mysql_read() {
            $(".read_div").append("<font color='black'>&#9632;</font> ");
         }
         $(".read_res").append(" (" + data['iQueryResponseTime'] + "ms)");
+        read_lock=0;
       }
     });
+  }
+  else {
+     $(".read_div").append("<font color='black'>&#9633;</font> ");
+  }
 }
 
 function mysql_write() {
-  $.ajax({
+  if (write_lock == 0) {
+    write_lock = 1;
+
+    $.ajax({
       type: "GET",
       dataType: "json",
       url: "writes.php",
@@ -68,8 +82,13 @@ function mysql_write() {
            $(".write_div").append("<font color='black'>&#9632;</font> ");
         }
         $(".write_res").append(" (" + data['iQueryResponseTime'] + "ms)");
+        write_lock=0;
       }
     });
+  }
+  else {
+     $(".write_div").append("<font color='black'>&#9633;</font> ");
+  }
   $(document).scrollTop($(document).height());
 }
 
