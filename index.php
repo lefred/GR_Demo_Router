@@ -3,12 +3,21 @@
 <head>
   <meta charset="utf-8">
   <title>MySQL InnoDB Cluster - Demo</title>
-  <link href="style.css" type="text/css" rel="stylesheet" />
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          rel="stylesheet"
+          crossorigin="anonymous">
+  <link href="styles/style.css" type="text/css" rel="stylesheet" />
   <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 </head>
 <body>
 <div class='content'>
-<img src="InnoDBCluster.png">
+<img src="pics/InnoDBCluster.png">
+<button id="button-workload"
+     class="btn btn-danger"
+     style="float:right;"
+     onclick="run_workload()">
+     Run workload
+</button>
 <div class='displayflex content'>
   <div class='router'>
     <div class='displayflex'>
@@ -26,37 +35,40 @@
   </div>
   <div class='group_overview'>
 
+    <section id="server-zone">
+        <h4 class="recovery">Group</h4>
+    </section>
 
-  <div id="group">
-  group
-  </div>
-  <div id="recovery">
-  recovery
-  </div>
-  <div id="off">
-    <div id="server1-off" class="">
-      <span class="fas fa-server"></span>
-      <p class="texte">mysql1</p>
-     </div>
-    
-        <div id="server2-off" class="">
+
+    <section id="server-zone">
+        <h4 class="recovery">Recovery</h4>
+    </section>
+
+    <section id="server-dock">
+        <article id="mysql1" class="server-box server-down">
             <span class="fas fa-server"></span>
-            <p class="texte">mysql2</p>
-        </div>
-    
-        <div id="server3-off" class="">
+            <div class="server-info">
+              mysql1 
+            </div>
+        </article>
+        <article id="mysql2" class="server-box server-down">
             <span class="fas fa-server"></span>
-            <p class="texte">mysql3</p>
-        </div>
-  </div>
-
-
-
+            <div class="server-info">
+              mysql2
+            </div>
+        </article>
+        <article id="mysql3" class="server-box server-down">
+            <span class="fas fa-server"></span>
+            <div class="server-info">
+              mysql3
+            </div>
+        </article>
+    </section>
 
   </div>
 </div>
 </div>
-<script src="script.js"></script>
+<script src="scripts/script.js"></script>
 
 </body>
 </html>

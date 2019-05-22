@@ -63,20 +63,12 @@ body{
       font: normal normal normal 14px/1 'FontAwesomeRegular';
 }
 
-#wrapper{
-    width:80%;
-    height:100%;
-    margin:auto;
-    border-left:2px solid #666;
-    border-right:2px solid #666;
-    padding:10px;
-}
 
 /*** SERVER ZONE ***/
 #server-zone{
     margin-top:20px;
     padding:8px;
-    min-height:250px;
+    min-height:150px;
     border:1px solid #CCC;
     border-radius:12px;
 }
@@ -85,26 +77,17 @@ body{
     justify-content:space-around;
     align-items: top;
     margin-top:8px;
-    border:1px solid #CCC;
+    border:0px solid #CCC;
     border-radius:8px;
     padding: 4px 0px;
 }
 h4.recovery{
     color:#28a745;
 }
-#button-dock{
-    display:flex;
-    justify-content:space-around;
-    margin-top:8px;
-    border:1px solid #CCC;
-    border-radius:8px;
-    padding: 4px 0px;
-}
-
 
 /*** SERVER ANIMATION ***/
 .fa-server:after{
-    content: "\f233";
+    content: "\f1c0";
     position:relative;
     top:0px;
     left:0px;
@@ -122,12 +105,24 @@ h4.recovery{
 .server-info{
     font-size:0.8em;
     color:#666;
-    text-align:left;
+    text-align:center;
     width:100%;
 }
 
-.server-fail{
-    color:#dc3545;
+.server-up{
+    color: darkgrey;
+}
+
+.server-primary{
+    color: red;
+}
+
+.server-secondary{
+    color: green;
+}
+
+.server-down{
+    color: lightgray;
 }
 
 .server-animation-group{
@@ -145,12 +140,12 @@ h4.recovery{
 @keyframes server-animation-group {
     from { 
         transform : translateY(-160px);
-        color:#00F; 
+        //color:#00F; 
     }
 
     to { 
         transform : translateY(-420px);
-        color:#00F;
+        //color:#00F;
     }
 }
 
@@ -158,24 +153,24 @@ h4.recovery{
 @keyframes server-animation-recovery {
     from { 
         transform : translateY(0px);
-        color:#dc3545; 
+        //color:#dc3545; 
     }
 
     to { 
         transform : translateY(-160px);
-        color:#28a745;
+        //color:#28a745;
     }
 }
 
 @keyframes server-animation-fail {
     from { 
         transform : translateY(-160px);
-        color:#28a745; 
+        //color:#28a745; 
     }
 
     to { 
         transform : translateY(0px);
-        color:#dc3545;
+        //color:#dc3545;
     }
 }
 
@@ -229,9 +224,12 @@ h4.recovery{
 }
 
 .group_overview {
-    width:40%; 
+    width:60%; 
     display: inline-block;
     border: 0px solid;
+    height:100%;
+    margin:auto;
+    padding: 10px;
 }
 .displayflex {
     display: flex; 
@@ -239,6 +237,7 @@ h4.recovery{
     border: 0px solid red;
 }
 
-.content {
-    height: 90%;
+.ping_in {
+    transition: all 0.5s ease-in-out;
+    transform: scale(1.3);
 }
