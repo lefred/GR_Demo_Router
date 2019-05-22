@@ -3,12 +3,12 @@
 require('config.php');
 $sql = "insert into demo values(0,@@hostname,now());";
 $time = microtime(true);
-$result = $mysqli->query($sql);
+$result = $mysqli_w->query($sql);
 $diff = microtime(true)-$time;
 $milliseconds =  $diff * 1000;
 
 if ($result) {
-  $last_id = $mysqli->insert_id;
+  $last_id = $mysqli_w->insert_id;
   $results = ["sEcho" => 1,
               "iLastID" => $last_id,
 	      "iQueryResponseTime" => round($milliseconds,5)];

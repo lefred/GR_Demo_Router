@@ -1,0 +1,265 @@
+@font-face {
+    font-family: 'FontAwesomeBrands';
+    font-style: normal;
+    font-weight: normal;
+    src: url("font/fa-brands-400.eot");
+    src: url("font/fa-brands-400.eot?#iefix") format("embedded-opentype"),
+         url("font/fa-brands-400.woff2") format("woff2"),
+         url("font/fa-brands-400.woff") format("woff"),
+         url("font/fa-brands-400.ttf") format("truetype"),
+         url("font/fa-brands-400.svg#fontawesome") format("svg");
+}
+@font-face {
+    font-family: 'FontAwesomeRegular';
+    font-style: normal;
+    font-weight: 400;
+    src: url("font/fa-regular-400.eot");
+    src: url("font/fa-regular-400.eot?#iefix") format("embedded-opentype"),
+         url("font/fa-regular-400.woff2") format("woff2"),
+         url("font/fa-regular-400.woff") format("woff"),
+         url("font/fa-regular-400.ttf") format("truetype"),
+         url("font/fa-regular-400.svg#fontawesome") format("svg");
+}
+@font-face {
+    font-family: 'FontAwesomeSolid';
+    font-style: normal;
+    font-weight: 900;
+    src: url("font/fa-solid-900.eot");
+    src: url("font/fa-solid-900.eot?#iefix") format("embedded-opentype"),
+         url("font/fa-solid-900.woff2") format("woff2"),
+         url("font/fa-solid-900.woff") format("woff"),
+         url("font/fa-solid-900.ttf") format("truetype"),
+         url("font/fa-solid-900.svg#fontawesome") format("svg");
+}
+
+  
+  /*** GLYPHE ***/
+.far,
+.fab,
+.fas {
+    display: inline-block;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transition: all 0.5s ease-out;
+}  
+.fas{
+      font: normal normal normal 14px/1 'FontAwesomeSolid';
+}  
+.fab{
+      font: normal normal normal 14px/1 'FontAwesomeBrands';
+}
+.far{
+      font: normal normal normal 14px/1 'FontAwesomeRegular';
+}
+
+.fa-server:after{
+    content: "\f1c0";
+    position:relative;
+    top:0px;
+    left:0px;
+    font-size:50pt;
+}
+html,body {
+    height: 100%;
+}
+
+body{
+    margin: 0;
+    background: #ffffff;
+    font-family: arial;
+}
+
+#conteneur{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items:center;
+}
+
+#group {
+    padding: 10px 20px 10px 20px;
+    margin-top: 10px;
+    width: 90%;
+    min-height: 25vh;
+    border: 1px solid gray;
+    border-radius: 25px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#recovery {
+    padding: 10px 20px 10px 20px;
+    margin-top: 10px;
+    width: 90%;
+    min-height: 20vh;
+    border: 1px solid gray;
+    border-radius: 25px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#off {
+    padding: 10px;
+    margin-top: 10px;
+    width: 90%;
+    min-height: 20vh;
+    border: 0px solid gray;
+    border-radius: 25px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    color: red;
+}
+
+#boutons {
+    padding: 15px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    width: 80%;
+    min-height: 10vh;
+    border: 1px solid gray;
+    border-radius: 25px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#bouton-serveur-1 a, #bouton-serveur-2 a, #bouton-serveur-3 a{
+    color: white;
+    text-decoration: none;
+}
+
+.bouton-on {
+    padding: 0px 10px;
+    background: green;
+    font-size: 1em;
+    color: white;
+    font-weight: bold;
+}
+
+.bouton-off{
+    padding: 0px 10px;
+    background: red;
+    font-size: 1em;
+    color: white;
+    font-weight: bold;
+}
+
+.animate-on{
+    animation-name: on;
+    animation-duration: 4s;
+    animation-iteration-count: 1;
+    animation-fill-mode: both;
+    color: red;
+}
+
+@keyframes on {
+    
+    0%   {
+
+
+    }
+
+    100% {
+    
+        transform: translateY(-225px);
+        color: green;
+    }
+
+}
+
+.animate-off{
+    animation-name: off;
+    animation-duration: 4s;
+    animation-iteration-count: 1;
+    animation-fill-mode: both;
+    color: red;
+}
+
+@keyframes off {
+    
+    0%   {
+        transform: translateY(-225px);
+        color: green;
+    }
+
+    99%{
+        transform: translateY(0px);
+    }
+    100% {
+        color: red;
+    }
+
+}
+
+.texte{
+    color: black;
+    text-align: center;
+    font-size: 0.75em;
+}
+
+.read_div { 
+    font-size: 30px; 
+    vertical-align:bottom; 
+}
+
+.write_div { 
+    font-size: 30px; 
+    vertical-align:bottom; 
+}
+
+.read_res { 
+    border: 0px solid; 
+}
+
+.write_res { 
+    border: 0px solid; 
+}
+
+.green {
+    color: green;
+}
+
+.red {
+    color: red;
+}
+
+.reads_title {
+    width:50%; 
+    display: inline-block;
+    font-size: 30px; 
+    border: 0px solid;
+}
+
+.reads_results {
+    font-size: 13px; 
+}
+
+.router {
+    width:60%; 
+    display: inline-block;
+    border: 0px solid;
+}
+
+.group_overview {
+    width:40%; 
+    display: inline-block;
+    border: 0px solid;
+}
+.displayflex {
+    display: flex; 
+    justify-content: space-between;
+    border: 0px solid red;
+}
+
+.content {
+    height: 90%;
+}
