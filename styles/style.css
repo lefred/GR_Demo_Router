@@ -137,15 +137,22 @@ h4.recovery{
     animation: server-animation-fail 2s both ease-in-out;
 }
 
+.server-read{
+    animation: crescendo .1s alternate ease-in;  
+}
+
+@keyframes crescendo {
+    0%   {transform: translateY(-320px) scale(.8);}
+    100% {transform: translateY(-320px) scale(1);}
+}
+
 @keyframes server-animation-group {
     from { 
-        transform : translateY(-160px);
-        //color:#00F; 
+        transform : translateY(-150px);
     }
 
     to { 
-        transform : translateY(-420px);
-        //color:#00F;
+        transform : translateY(-320px);
     }
 }
 
@@ -153,24 +160,20 @@ h4.recovery{
 @keyframes server-animation-recovery {
     from { 
         transform : translateY(0px);
-        //color:#dc3545; 
     }
 
     to { 
-        transform : translateY(-160px);
-        //color:#28a745;
+        transform : translateY(-150px);
     }
 }
 
 @keyframes server-animation-fail {
     from { 
-        transform : translateY(-160px);
-        //color:#28a745; 
+        transform : translateY(-150px);
     }
 
     to { 
         transform : translateY(0px);
-        //color:#dc3545;
     }
 }
 
@@ -235,9 +238,4 @@ h4.recovery{
     display: flex; 
     justify-content: space-between;
     border: 0px solid red;
-}
-
-.ping_in {
-    transition: all 0.5s ease-in-out;
-    transform: scale(1.3);
 }

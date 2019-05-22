@@ -2,9 +2,15 @@ var positionFail = 0;
 var positionRecovery  = -150;
 var positionGroup  = -320;
 var positionState = {};
+var serverState = {};
+
 positionState['mysql1'] = 0;
 positionState['mysql2'] = 0;
 positionState['mysql3'] = 0;
+
+serverState['mysql1'] = 'OFFLINE';
+serverState['mysql2'] = 'OFFLINE';
+serverState['mysql3'] = 'OFFLINE';
 
 var i_read;
 var i_write;
@@ -57,8 +63,11 @@ function mysql_read() {
                               "<strong>timestamp:</strong> " + data['aaData'][0]["entered"] + 
                               "<br><strong>read from:</strong> " + data['aaData'][0]["read_from"]
                               );
-           //var myServer = document.getElementById(data['aaData'][0]["read_from"]);
-           //myServer.classList.add("ping_in");
+           var myServer = document.getElementById(data['aaData'][0]["read_from"]);
+           myServer.classList.add("server-read");
+           setTimeout(function() {
+             myServer.classList.remove("server-read");
+           }, 600);
 
         } else {
            $(".read_div").append("<font color='black'>&#9632;</font> ");
@@ -195,18 +204,30 @@ function get_server_info(ServerName) {
       success: function(data) {
         if (data['sEcho'] == 1) {
             if (data['aaData'][0]['member_state'] == 'ONLINE') {
-                changeStateServerToGroup(ServerName);
                 if  (data['aaData'][0]['member_role'] == 'PRIMARY') {
-                  setToPrimary(ServerName);
+                  if (serverState[ServerName] != 'PRIMARY') {
+                    setToPrimary(ServerName);
+                    changeStateServerToGroup(ServerName);
+                  }
                 } else if  (data['aaData'][0]['member_role'] == 'SECONDARY') {
-                  setToSecondary(ServerName);
+                  if (serverState[ServerName] != 'SECONDARY') {
+                    setToSecondary(ServerName);
+                    changeStateServerToGroup(ServerName);
+                  }
                 }
+                serverState[ServerName] = data['aaData'][0]['member_role'];
             } else if (data['aaData'][0]['member_state'] == 'RECOVERING') {
-                setToStandalone(ServerName)
-                changeStateServerToRecovery(ServerName);
+                if (serverState[ServerName] != 'RECOVERING') {
+                  setToStandalone(ServerName)
+                  changeStateServerToRecovery(ServerName);
+                  serverState[ServerName] = data['aaData'][0]['member_state']
+                }
             } else if (data['aaData'][0]['member_state'] == 'OFFLINE') {
-                setToStandalone(ServerName)
-                changeStateServerToFail(ServerName);
+                if (serverState[ServerName] != 'OFFLINE') {
+                  setToStandalone(ServerName)
+                  changeStateServerToFail(ServerName);
+                  serverState[ServerName] = data['aaData'][0]['member_state']
+                }
             } 
         } else {
                 changeStateServerToFail(ServerName);
