@@ -34,17 +34,17 @@
   recovery
   </div>
   <div id="off">
-    <div id="serveur1-off" class="">
+    <div id="server1-off" class="">
       <span class="fas fa-server"></span>
       <p class="texte">mysql1</p>
      </div>
     
-        <div id="serveur2-off" class="">
+        <div id="server2-off" class="">
             <span class="fas fa-server"></span>
             <p class="texte">mysql2</p>
         </div>
     
-        <div id="serveur3-off" class="">
+        <div id="server3-off" class="">
             <span class="fas fa-server"></span>
             <p class="texte">mysql3</p>
         </div>

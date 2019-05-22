@@ -32,8 +32,17 @@
          url("font/fa-solid-900.svg#fontawesome") format("svg");
 }
 
-  
-  /*** GLYPHE ***/
+html,body {
+    height: 100%;
+}
+
+body{
+    margin: 0;
+    background: #ffffff;
+    font-family: arial;
+}
+
+/*** GLYPHE ***/
 .far,
 .fab,
 .fas {
@@ -54,150 +63,120 @@
       font: normal normal normal 14px/1 'FontAwesomeRegular';
 }
 
+#wrapper{
+    width:80%;
+    height:100%;
+    margin:auto;
+    border-left:2px solid #666;
+    border-right:2px solid #666;
+    padding:10px;
+}
+
+/*** SERVER ZONE ***/
+#server-zone{
+    margin-top:20px;
+    padding:8px;
+    min-height:250px;
+    border:1px solid #CCC;
+    border-radius:12px;
+}
+#server-dock{
+    display:flex;
+    justify-content:space-around;
+    align-items: top;
+    margin-top:8px;
+    border:1px solid #CCC;
+    border-radius:8px;
+    padding: 4px 0px;
+}
+h4.recovery{
+    color:#28a745;
+}
+#button-dock{
+    display:flex;
+    justify-content:space-around;
+    margin-top:8px;
+    border:1px solid #CCC;
+    border-radius:8px;
+    padding: 4px 0px;
+}
+
+
+/*** SERVER ANIMATION ***/
 .fa-server:after{
-    content: "\f1c0";
+    content: "\f233";
     position:relative;
     top:0px;
     left:0px;
     font-size:50pt;
 }
-html,body {
-    height: 100%;
+
+.server-box{
+    position:relative;
+    width: 110px;
+    min-height: 100px;
+    text-align:center;
+    color:#dc3545;
 }
 
-body{
-    margin: 0;
-    background: #ffffff;
-    font-family: arial;
+.server-info{
+    font-size:0.8em;
+    color:#666;
+    text-align:left;
+    width:100%;
 }
 
-#conteneur{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items:center;
+.server-fail{
+    color:#dc3545;
 }
 
-#group {
-    padding: 10px 20px 10px 20px;
-    margin-top: 10px;
-    width: 90%;
-    min-height: 25vh;
-    border: 1px solid gray;
-    border-radius: 25px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
+.server-animation-group{
+    animation: server-animation-group 2s both ease-in-out;
 }
 
-#recovery {
-    padding: 10px 20px 10px 20px;
-    margin-top: 10px;
-    width: 90%;
-    min-height: 20vh;
-    border: 1px solid gray;
-    border-radius: 25px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
+.server-animation-recovery{
+    animation: server-animation-recovery 2s both ease-in-out;
 }
 
-#off {
-    padding: 10px;
-    margin-top: 10px;
-    width: 90%;
-    min-height: 20vh;
-    border: 0px solid gray;
-    border-radius: 25px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    color: red;
+.server-animation-fail{
+    animation: server-animation-fail 2s both ease-in-out;
 }
 
-#boutons {
-    padding: 15px;
-    margin-top: 15px;
-    margin-bottom: 15px;
-    width: 80%;
-    min-height: 10vh;
-    border: 1px solid gray;
-    border-radius: 25px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-}
-
-#bouton-serveur-1 a, #bouton-serveur-2 a, #bouton-serveur-3 a{
-    color: white;
-    text-decoration: none;
-}
-
-.bouton-on {
-    padding: 0px 10px;
-    background: green;
-    font-size: 1em;
-    color: white;
-    font-weight: bold;
-}
-
-.bouton-off{
-    padding: 0px 10px;
-    background: red;
-    font-size: 1em;
-    color: white;
-    font-weight: bold;
-}
-
-.animate-on{
-    animation-name: on;
-    animation-duration: 4s;
-    animation-iteration-count: 1;
-    animation-fill-mode: both;
-    color: red;
-}
-
-@keyframes on {
-    
-    0%   {
-
-
+@keyframes server-animation-group {
+    from { 
+        transform : translateY(-160px);
+        color:#00F; 
     }
 
-    100% {
-    
-        transform: translateY(-225px);
-        color: green;
+    to { 
+        transform : translateY(-420px);
+        color:#00F;
     }
-
 }
 
-.animate-off{
-    animation-name: off;
-    animation-duration: 4s;
-    animation-iteration-count: 1;
-    animation-fill-mode: both;
-    color: red;
+
+@keyframes server-animation-recovery {
+    from { 
+        transform : translateY(0px);
+        color:#dc3545; 
+    }
+
+    to { 
+        transform : translateY(-160px);
+        color:#28a745;
+    }
 }
 
-@keyframes off {
-    
-    0%   {
-        transform: translateY(-225px);
-        color: green;
+@keyframes server-animation-fail {
+    from { 
+        transform : translateY(-160px);
+        color:#28a745; 
     }
 
-    99%{
-        transform: translateY(0px);
+    to { 
+        transform : translateY(0px);
+        color:#dc3545;
     }
-    100% {
-        color: red;
-    }
-
 }
 
 .texte{
