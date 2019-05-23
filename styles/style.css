@@ -112,7 +112,7 @@ h4.recovery{
 }
 
 .server-up{
-    color: darkgrey;
+    color: #5d87a1;
 }
 
 .server-primary{
@@ -125,6 +125,10 @@ h4.recovery{
 
 .server-down{
     color: lightgray;
+}
+
+.server-partionned{
+    color: #f8981d;
 }
 
 .server-animation-group{
@@ -150,7 +154,7 @@ h4.recovery{
 
 @keyframes server-animation-group {
     from { 
-        transform : translateY(-150px);
+        transform : translateY(-140px);
     }
 
     to { 
@@ -165,13 +169,13 @@ h4.recovery{
     }
 
     to { 
-        transform : translateY(-150px);
+        transform : translateY(-140px);
     }
 }
 
 @keyframes server-animation-fail {
     from { 
-        transform : translateY(-150px);
+        transform : translateY(-140px);
     }
 
     to { 
