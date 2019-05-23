@@ -4,11 +4,11 @@ var positionGroup  = -320;
 var positionState = {};
 var serverState = {};
 
-positionState['mysql1'] = 0;
+positionState['mysql4'] = 0;
 positionState['mysql2'] = 0;
 positionState['mysql3'] = 0;
 
-serverState['mysql1'] = 'OFFLINE';
+serverState['mysql4'] = 'OFFLINE';
 serverState['mysql2'] = 'OFFLINE';
 serverState['mysql3'] = 'OFFLINE';
 
@@ -18,7 +18,7 @@ var data;
 var read_lock=0;
 var write_lock=0;
 var workload_running=0;
-var mysql1_info = setInterval(function() {get_server_info('mysql1');}, 1000);
+var mysql4_info = setInterval(function() {get_server_info('mysql4');}, 1000);
 var mysql2_info = setInterval(function() {get_server_info('mysql2');}, 1000);
 var mysql3_info = setInterval(function() {get_server_info('mysql3');}, 1000);
 
@@ -233,6 +233,9 @@ function get_server_info(ServerName) {
                 changeStateServerToFail(ServerName);
                 setToDown(ServerName)
         }
+      },
+      error: function(data) {
+          console.log("failed");
       }
     });
 }

@@ -2,7 +2,7 @@
 
 require('config.php');
 $sql = "select member_role, member_state, member_version, @@read_only, @@super_read_only from performance_schema.replication_group_members where member_host=@@hostname;";
-if ( $_GET['server'] == "mysql1" ) {
+if ( $_GET['server'] == "mysql4" ) {
 	$result = $mysqli_1->query($sql);
 } elseif ( $_GET['server'] == "mysql2" ) {
         $result = $mysqli_2->query($sql);

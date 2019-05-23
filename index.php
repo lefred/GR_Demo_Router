@@ -14,7 +14,7 @@
 <img src="pics/InnoDBCluster.png">
 <button id="button-workload"
      class="btn btn-danger"
-     style="float:right;"
+     style="position: fixed; right: 8px;"
      onclick="run_workload()">
      Run workload
 </button>
@@ -45,10 +45,10 @@
     </section>
 
     <section id="server-dock">
-        <article id="mysql1" class="server-box server-down">
+        <article id="mysql4" class="server-box server-down">
             <span class="fas fa-server"></span>
             <div class="server-info">
-              mysql1 
+              mysql4 
             </div>
         </article>
         <article id="mysql2" class="server-box server-down">

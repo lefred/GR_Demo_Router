@@ -40,6 +40,8 @@ body{
     margin: 0;
     background: #ffffff;
     font-family: arial;
+    padding-left: 8px;
+    padding-top: 8px;
 }
 
 /*** GLYPHE ***/
