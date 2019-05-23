@@ -1,9 +1,9 @@
 <?php
 
 require('config.php');
-$sql = "select * from demo order by entered desc limit 1;";
+$sql = "select *, @@hostname 'read_from' from demo order by entered desc limit 1;";
 $time = microtime(true);
-$result = $mysqli->query($sql);
+$result = $mysqli_r->query($sql);
 $diff = microtime(true)-$time;
 $milliseconds =  $diff * 1000;
 

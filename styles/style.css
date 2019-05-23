@@ -1,0 +1,243 @@
+@font-face {
+    font-family: 'FontAwesomeBrands';
+    font-style: normal;
+    font-weight: normal;
+    src: url("font/fa-brands-400.eot");
+    src: url("font/fa-brands-400.eot?#iefix") format("embedded-opentype"),
+         url("font/fa-brands-400.woff2") format("woff2"),
+         url("font/fa-brands-400.woff") format("woff"),
+         url("font/fa-brands-400.ttf") format("truetype"),
+         url("font/fa-brands-400.svg#fontawesome") format("svg");
+}
+@font-face {
+    font-family: 'FontAwesomeRegular';
+    font-style: normal;
+    font-weight: 400;
+    src: url("font/fa-regular-400.eot");
+    src: url("font/fa-regular-400.eot?#iefix") format("embedded-opentype"),
+         url("font/fa-regular-400.woff2") format("woff2"),
+         url("font/fa-regular-400.woff") format("woff"),
+         url("font/fa-regular-400.ttf") format("truetype"),
+         url("font/fa-regular-400.svg#fontawesome") format("svg");
+}
+@font-face {
+    font-family: 'FontAwesomeSolid';
+    font-style: normal;
+    font-weight: 900;
+    src: url("font/fa-solid-900.eot");
+    src: url("font/fa-solid-900.eot?#iefix") format("embedded-opentype"),
+         url("font/fa-solid-900.woff2") format("woff2"),
+         url("font/fa-solid-900.woff") format("woff"),
+         url("font/fa-solid-900.ttf") format("truetype"),
+         url("font/fa-solid-900.svg#fontawesome") format("svg");
+}
+
+html,body {
+    height: 100%;
+}
+
+body{
+    margin: 0;
+    background: #ffffff;
+    font-family: arial;
+    padding-left: 8px;
+    padding-top: 8px;
+}
+
+/*** GLYPHE ***/
+.far,
+.fab,
+.fas {
+    display: inline-block;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transition: all 0.5s ease-out;
+}  
+.fas{
+      font: normal normal normal 14px/1 'FontAwesomeSolid';
+}  
+.fab{
+      font: normal normal normal 14px/1 'FontAwesomeBrands';
+}
+.far{
+      font: normal normal normal 14px/1 'FontAwesomeRegular';
+}
+
+
+/*** SERVER ZONE ***/
+#server-zone{
+    margin-top:20px;
+    padding:8px;
+    min-height:150px;
+    border:1px solid #CCC;
+    border-radius:12px;
+}
+#server-dock{
+    display:flex;
+    justify-content:space-around;
+    align-items: top;
+    margin-top:8px;
+    border:0px solid #CCC;
+    border-radius:8px;
+    padding: 4px 0px;
+}
+h4.recovery{
+    color:#28a745;
+}
+
+/*** SERVER ANIMATION ***/
+.fa-server:after{
+    content: "\f1c0";
+    position:relative;
+    top:0px;
+    left:0px;
+    font-size:50pt;
+}
+
+.server-box{
+    position:relative;
+    width: 110px;
+    min-height: 100px;
+    text-align:center;
+    color:#dc3545;
+}
+
+.server-info{
+    font-size:0.8em;
+    color:#666;
+    text-align:center;
+    width:100%;
+}
+
+.server-up{
+    color: darkgrey;
+}
+
+.server-primary{
+    color: red;
+}
+
+.server-secondary{
+    color: green;
+}
+
+.server-down{
+    color: lightgray;
+}
+
+.server-animation-group{
+    animation: server-animation-group 2s both ease-in-out;
+}
+
+.server-animation-recovery{
+    animation: server-animation-recovery 2s both ease-in-out;
+}
+
+.server-animation-fail{
+    animation: server-animation-fail 2s both ease-in-out;
+}
+
+.server-read{
+    animation: crescendo .1s alternate ease-in;  
+}
+
+@keyframes crescendo {
+    0%   {transform: translateY(-320px) scale(.8);}
+    100% {transform: translateY(-320px) scale(1);}
+}
+
+@keyframes server-animation-group {
+    from { 
+        transform : translateY(-150px);
+    }
+
+    to { 
+        transform : translateY(-320px);
+    }
+}
+
+
+@keyframes server-animation-recovery {
+    from { 
+        transform : translateY(0px);
+    }
+
+    to { 
+        transform : translateY(-150px);
+    }
+}
+
+@keyframes server-animation-fail {
+    from { 
+        transform : translateY(-150px);
+    }
+
+    to { 
+        transform : translateY(0px);
+    }
+}
+
+.texte{
+    color: black;
+    text-align: center;
+    font-size: 0.75em;
+}
+
+.read_div { 
+    font-size: 30px; 
+    vertical-align:bottom; 
+}
+
+.write_div { 
+    font-size: 30px; 
+    vertical-align:bottom; 
+}
+
+.read_res { 
+    border: 0px solid; 
+}
+
+.write_res { 
+    border: 0px solid; 
+}
+
+.green {
+    color: green;
+}
+
+.red {
+    color: red;
+}
+
+.reads_title {
+    width:50%; 
+    display: inline-block;
+    font-size: 30px; 
+    border: 0px solid;
+}
+
+.reads_results {
+    font-size: 13px; 
+}
+
+.router {
+    width:60%; 
+    display: inline-block;
+    border: 0px solid;
+}
+
+.group_overview {
+    width:60%; 
+    display: inline-block;
+    border: 0px solid;
+    height:100%;
+    margin:auto;
+    padding: 10px;
+}
+.displayflex {
+    display: flex; 
+    justify-content: space-between;
+    border: 0px solid red;
+}
