@@ -18,9 +18,10 @@ auth_plugin_sha256_password
 
 You also need to run the following steps in your database:
 
+```
 mysql -e "CREATE DATABASE clusterdemo"
 mysql clusterdemo < clusterdemo.sql
 mysql -e "create user clusterdemo identified by 'fred'"
 mysql -e "grant all privileges on *.* to clusterdemo@'%'"
-
+```
 
