@@ -38,7 +38,7 @@ function run_workload() {
   if (workload_running == 0) {
     workload_running = 1;
     i_read = setInterval(mysql_read, 1000);
-    i_write = setInterval(mysql_write, 100);
+    i_write = setInterval(mysql_write, 1000);
     button.firstChild.data = "Stop workload";
   } else {
     workload_running = 0;
