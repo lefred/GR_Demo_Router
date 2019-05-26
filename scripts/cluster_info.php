@@ -21,31 +21,43 @@ $sql = "select member_role, member_state, member_version, @@read_only,
        JOIN performance_schema.replication_group_member_stats 
 			 USING(member_id) where member_id=@@global.server_uuid;";
 
-if ($_GET['server'] == "mysql4") {
-	if ($mysqli_1) {
-		$result = $mysqli_1->query($sql);
-	}
-} elseif ($_GET['server'] == "mysql2") {
-	$result = $mysqli_2->query($sql);
-} else {
-	$result = $mysqli_3->query($sql);
-}
 
-if ($result) {
-	while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
-		$data[] = $row;
-	}
-	if (!$data) {
-		$echo = 2;
-	} else {
-		$echo = 1;
-	}
-	$results = [
-		"sEcho" => $echo,
-		"aaData" =>  $data
-	];
-} else {
-	$results = [ "sEcho" => 0 ];
-}
+$sql_stats = "select COUNT_TRANSACTIONS_LOCAL_PROPOSED, COUNT_TRANSACTIONS_REMOTE_APPLIED, 
+										 COUNT_TRANSACTIONS_REMOTE_IN_APPLIER_QUEUE, COUNT_TRANSACTIONS_ROWS_VALIDATING 
+							from  performance_schema.replication_group_member_stats 
+							where member_id=@@global.server_uuid;";
 
-echo json_encode($results);
+$sql_recovery = "select substring_index(substring_index(GTID_SUBTRACT(RECEIVED_TRANSACTION_SET,
+												@@gtid_executed),':',-1),'-',-1)-
+												substring_index(substring_index(GTID_SUBTRACT(RECEIVED_TRANSACTION_SET,
+												@@gtid_executed),':',-1),'-',1) as trx_to_recover 
+								 from performance_schema.replication_connection_status 
+								 where channel_name='group_replication_recovery;";
+
+if (isset($_GET['server'])){
+			
+	if (isset($mysqli_server)){
+		$result = $mysqli_server->query($sql);
+
+		if ($result) {
+			while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
+				$data[] = $row;
+			}
+			if (!$data) {
+				$echo = 2;
+			} else {
+				$echo = 1;
+			}
+			$results = [
+				"sEcho" => $echo,
+				"aaData" =>  $data
+			];
+		} else {
+			$results = [ "sEcho" => 0 ];
+		}
+	}
+	else {
+			$results = [ "sEcho" => 0 ];
+  }
+	echo json_encode($results);
+}

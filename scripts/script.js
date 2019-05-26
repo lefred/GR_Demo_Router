@@ -4,18 +4,24 @@ var positionGroup = -320;
 var positionState = {};
 var serverState = {};
 var serverPart = {};
+var serverNameBackground = {};
+//var extendedView = 1;
 
-positionState['mysql4'] = 0;
+positionState['mysql1'] = 0;
 positionState['mysql2'] = 0;
 positionState['mysql3'] = 0;
 
-serverState['mysql4'] = 'N/A';
+serverState['mysql1'] = 'N/A';
 serverState['mysql2'] = 'N/A';
 serverState['mysql3'] = 'N/A';
 
-serverPart['mysql4'] = 'YES';
+serverPart['mysql1'] = 'YES';
 serverPart['mysql2'] = 'YES';
 serverPart['mysql3'] = 'YES';
+
+serverNameBackground['mysql1'] = 'mysql1';
+serverNameBackground['mysql2'] = 'mysql2';
+serverNameBackground['mysql3'] = 'mysql3';
 
 var i_read;
 var i_write;
@@ -23,7 +29,7 @@ var data;
 var read_lock = 0;
 var write_lock = 0;
 var workload_running = 0;
-var mysql4_info = setInterval(function () { get_server_info('mysql4'); }, 1000);
+var mysql1_info = setInterval(function () { get_server_info('mysql1'); }, 1000);
 var mysql2_info = setInterval(function () { get_server_info('mysql2'); }, 1000);
 var mysql3_info = setInterval(function () { get_server_info('mysql3'); }, 1000);
 
@@ -211,7 +217,7 @@ function setToPartitionned(ServerTarget) {
   var myServer = document.getElementById(ServerTarget);
   myServer.style.color = "#f8981d";
   switch (ServerTarget) {
-    case "mysql4":
+    case "mysql1":
       myServer.style.borderRight = "#f8981d dashed 1px";
       break;
     case "mysql2":
@@ -229,9 +235,11 @@ function get_server_info(ServerName) {
   $.ajax({
     type: "GET",
     dataType: "json",
-    url: "scripts/cluster_info.php?server=" + ServerName,
+    url: "scripts/cluster_info.php?server=" + serverNameBackground[ServerName],
     data: data,
     success: function (data) {
+      //console.log(ServerName);
+      //console.debug(data);
       if (data['sEcho'] == 1) {
         if (data['aaData'][0]['member_state'] == 'ONLINE') {
           if (data['aaData'][0]['member_role'] == 'PRIMARY') {

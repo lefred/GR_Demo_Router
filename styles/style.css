@@ -99,7 +99,7 @@ h4.recovery{
 .server-box{
     position:relative;
     width: 110px;
-    min-height: 100px;
+    min-height: 300px;
     text-align:center;
     color:#dc3545;
 }
