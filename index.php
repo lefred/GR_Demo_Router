@@ -3,21 +3,27 @@
 <head>
   <meta charset="utf-8">
   <title>MySQL InnoDB Cluster - Demo</title>
-  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+  <link href="libs/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
           rel="stylesheet"
           crossorigin="anonymous">
   <link href="styles/style.css" type="text/css" rel="stylesheet" />
-  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="libs/jquery-1.10.2.js"></script>
 </head>
 <body>
 <div class='content'>
 <img src="pics/InnoDBCluster.png">
+<span style="position: fixed; right: 8px;">
+<button id="button-extended-view"
+     class="btn btn-info"
+     onclick="enable_extended_view()">
+     Extended view
+</button>
 <button id="button-workload"
      class="btn btn-danger"
-     style="position: fixed; right: 8px;"
      onclick="run_workload()">
      Run workload
 </button>
+</span>
 <div class='displayflex content'>
   <div class='router'>
     <div class='displayflex'>
@@ -46,26 +52,26 @@
 
     <section id="server-dock">
         <article id="mysql1" class="server-box server-down">
-            <span class="fas fa-server"></span>
+            <span id="mysql1_pop" class="fas fa-server"></span>
             <div class="server-info">
               mysql1
-              <div class="server-info-extra"> 
+              <div id="server1_info_extra" class="server-info-extra"> 
               </div> 
             </div>
         </article>
         <article id="mysql2" class="server-box server-down">
-            <span class="fas fa-server"></span>
+            <span id="mysql2_pop" class="fas fa-server"></span>
             <div class="server-info">
               mysql2
-              <div class="server-info-extra"> 
+              <div id="server2_info_extra" class="server-info-extra"> 
               </div> 
             </div>
         </article>
         <article id="mysql3" class="server-box server-down">
-            <span class="fas fa-server"></span>
+            <span id="mysql3_pop" class="fas fa-server"></span>
             <div class="server-info">
               mysql3
-              <div class="server-info-extra"> 
+              <div id="server3_info_extra" class="server-info-extra"> 
               </div> 
             </div>
         </article>

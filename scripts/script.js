@@ -5,7 +5,7 @@ var positionState = {};
 var serverState = {};
 var serverPart = {};
 var serverNameBackground = {};
-//var extendedView = 1;
+var extendedView = 0;
 
 positionState['mysql1'] = 0;
 positionState['mysql2'] = 0;
@@ -38,15 +38,114 @@ function run_workload() {
   if (workload_running == 0) {
     workload_running = 1;
     i_read = setInterval(mysql_read, 1000);
-    i_write = setInterval(mysql_write, 2000);
-    button.firstChild.data = "Stop workload"
+    i_write = setInterval(mysql_write, 100);
+    button.firstChild.data = "Stop workload";
   } else {
     workload_running = 0;
     clearInterval(i_read);
     clearInterval(i_write);
-    button.firstChild.data = "Run workload"
+    button.firstChild.data = "Run workload";
   }
+}
 
+function setStats(ServerName, stats){
+ var server_extra_info;
+ switch (ServerName) {
+    case "mysql1":
+      server_extra_info = document.getElementById('server1_info_extra');
+      break;
+    case "mysql2":
+      server_extra_info = document.getElementById('server2_info_extra');
+      break;
+    case "mysql3":
+      server_extra_info = document.getElementById('server3_info_extra');
+      break;
+  }
+  var string_stats = "Local Prop Tx: " + stats['COUNT_TRANSACTIONS_LOCAL_PROPOSED'] + "\n" 
+                   + " Tx Remote Ap: " + stats['COUNT_TRANSACTIONS_REMOTE_APPLIED'] + "\n"
+                   + " Tx Remote AQ: " + stats['COUNT_TRANSACTIONS_REMOTE_IN_APPLIER_QUEUE'] + "\n"
+                   + " Tx Rows Val.: " + stats['COUNT_TRANSACTIONS_ROWS_VALIDATING'];
+  server_extra_info.textContent=string_stats;
+  
+}
+
+function setEmptyExtra(ServerName) {
+ switch (ServerName) {
+    case "mysql1":
+      server_extra_info = document.getElementById('server1_info_extra');
+      break;
+    case "mysql2":
+      server_extra_info = document.getElementById('server2_info_extra');
+      break;
+    case "mysql3":
+      server_extra_info = document.getElementById('server3_info_extra');
+      break;
+  }
+  var string_stats = "";
+  server_extra_info.textContent=string_stats;
+}
+
+function setRecoveryTrx(ServerName, recovery_trx){
+ var server_extra_info;
+ switch (ServerName) {
+    case "mysql1":
+      server_extra_info = document.getElementById('server1_info_extra');
+      break;
+    case "mysql2":
+      server_extra_info = document.getElementById('server2_info_extra');
+      break;
+    case "mysql3":
+      server_extra_info = document.getElementById('server3_info_extra');
+      break;
+  }
+  var string_stats = "Tx To Recover: " + recovery_trx['trx_to_recover'];
+  server_extra_info.textContent=string_stats;
+}
+
+function enable_extended_view() {
+  var button = document.getElementById('button-extended-view');
+  var box=document.getElementById('server-zone');
+  var server1=document.getElementById('mysql1');
+  var server2=document.getElementById('mysql2');
+  var server3=document.getElementById('mysql3');
+  var server1_extra_info=document.getElementById('server1_info_extra');
+  var server2_extra_info=document.getElementById('server2_info_extra');
+  var server3_extra_info=document.getElementById('server3_info_extra');
+
+  if (extendedView == 0) {
+    extendedView = 1;
+    button.firstChild.data = "Normal view";
+    box.style.height="200px";
+
+    if ( server1.style.transform == "translateY(-320px)" ) {
+      server1.style.transform = "translateY(-370px)";
+    } 
+    if ( server2.style.transform == "translateY(-320px)" ) {
+      server2.style.transform = "translateY(-370px)";
+    }
+    if ( server3.style.transform == "translateY(-320px)"  ) {
+     server3.style.transform = "translateY(-370px)";
+    }
+    server1_extra_info.style.visibility="visible";
+    server2_extra_info.style.visibility="visible";
+    server3_extra_info.style.visibility="visible";
+  } else {
+    extendedView = 0;
+    button.firstChild.data = "Extended view";
+    box.style.height="150px";
+    if ( server1.style.transform == "translateY(-370px)" ) {
+      server1.style.transform = "translateY(-320px)";
+    } 
+    if ( server2.style.transform == "translateY(-370px)" ) {
+      server2.style.transform = "translateY(-320px)";
+    }
+    if ( server3.style.transform == "translateY(-370px)"  ) {
+     server3.style.transform = "translateY(-320px)";
+    }
+    server1_extra_info.style.visibility="hidden";
+    server2_extra_info.style.visibility="hidden";
+    server3_extra_info.style.visibility="hidden";
+  }
 }
 
 function mysql_read() {
@@ -74,7 +173,11 @@ function mysql_read() {
             "<strong>timestamp:</strong> " + data['aaData'][0]["entered"] +
             "<br><strong>read from:</strong> " + data['aaData'][0]["read_from"]
           );
-          var myServer = document.getElementById(data['aaData'][0]["read_from"]);
+          if (extendedView==1) {
+            var myServer = document.getElementById(data['aaData'][0]["read_from"] + "_pop");
+          } else {
+            var myServer = document.getElementById(data['aaData'][0]["read_from"]);
+          }
           myServer.classList.add("server-read");
           setTimeout(function () {
             myServer.classList.remove("server-read");
@@ -167,10 +270,14 @@ function changeStateServerToRecovery(ServerTarget) {
 
 function changeStateServerToGroup(ServerTarget) {
   var myServer = document.getElementById(ServerTarget);
+  var positionGroup_loc = positionGroup;
+  if ( extendedView == 1 ) {
+    positionGroup_loc = positionGroup_loc - 50;
+  }
   var player = myServer.animate([
     // keyframes
     { transform: "translateY(" + positionState[ServerTarget] + "px)" },
-    { transform: "translateY(" + positionGroup + "px)" }
+    { transform: "translateY(" + positionGroup_loc + "px)" }
   ],
     {
       // duree animation
@@ -179,9 +286,9 @@ function changeStateServerToGroup(ServerTarget) {
       easing: 'ease-in-out',
     });
   player.addEventListener('finish', function () {
-    myServer.style.transform = "translateY(" + positionGroup + "px)";
+    myServer.style.transform = "translateY(" + positionGroup_loc + "px)";
   });
-  positionState[ServerTarget] = positionGroup;
+  positionState[ServerTarget] = positionGroup_loc;
   return positionState[ServerTarget]
 }
 
@@ -204,6 +311,7 @@ function setToStandalone(ServerTarget) {
   myServer.style.color = "#5d87a1";
   myServer.style.borderRight = "#f8981d dashed 0px";
   myServer.style.borderLeft = "#f8981d dashed 0px";
+  setEmptyExtra(ServerTarget);
 }
 
 function setToDown(ServerTarget) {
@@ -211,6 +319,7 @@ function setToDown(ServerTarget) {
   myServer.style.color = "lightgray";
   myServer.style.borderRight = "#f8981d dashed 0px";
   myServer.style.borderLeft = "#f8981d dashed 0px";
+  setEmptyExtra(ServerTarget);
 }
 
 function setToPartitionned(ServerTarget) {
@@ -265,11 +374,17 @@ function get_server_info(ServerName) {
             serverPart[ServerName] = "YES";
           }
           serverState[ServerName] = data['aaData'][0]['member_role'];
+          if (data['aaStats'] && extendedView==1) {
+            setStats(ServerName,data['aaStats'][0]);
+          }
         } else if (data['aaData'][0]['member_state'] == 'RECOVERING') {
           if (serverState[ServerName] != 'RECOVERING') {
             setToStandalone(ServerName)
             changeStateServerToRecovery(ServerName);
             serverState[ServerName] = data['aaData'][0]['member_state']
+          }
+          if (data['aaRecovery'] && extendedView==1) {
+             setRecoveryTrx(ServerName,data['aaRecovery'][0]);
           }
         } else if (data['aaData'][0]['member_state'] == 'OFFLINE') {
           if (serverState[ServerName] != 'OFFLINE') {

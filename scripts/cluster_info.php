@@ -1,5 +1,8 @@
 <?php
 $data=null;
+$stats=null;
+$recovery_trx=null;
+
 require('config.php');
 $sql = "select member_role, member_state, member_version, @@read_only, 
         @@super_read_only,
@@ -32,7 +35,7 @@ $sql_recovery = "select substring_index(substring_index(GTID_SUBTRACT(RECEIVED_T
 												substring_index(substring_index(GTID_SUBTRACT(RECEIVED_TRANSACTION_SET,
 												@@gtid_executed),':',-1),'-',1) as trx_to_recover 
 								 from performance_schema.replication_connection_status 
-								 where channel_name='group_replication_recovery;";
+								 where channel_name='group_replication_recovery';";
 
 if (isset($_GET['server'])){
 			
@@ -48,9 +51,25 @@ if (isset($_GET['server'])){
 			} else {
 				$echo = 1;
 			}
+			$stats_res = $mysqli_server->query($sql_stats);
+			if ($stats_res) {
+				while ( $row = $stats_res->fetch_array(MYSQLI_ASSOC)) {
+					$stats[] = $row;
+				}
+			}
+
+			$recovery_trx_res = $mysqli_server->query($sql_recovery);
+			if ($recovery_trx_res) {
+				while ( $row = $recovery_trx_res->fetch_array(MYSQLI_ASSOC)) {
+					$recovery_trx[] = $row;
+				}
+			}
+
 			$results = [
-				"sEcho" => $echo,
-				"aaData" =>  $data
+				"sEcho"      => $echo,
+				"aaData"     =>  $data,
+				"aaStats"    => $stats,
+				"aaRecovery" => $recovery_trx
 			];
 		} else {
 			$results = [ "sEcho" => 0 ];

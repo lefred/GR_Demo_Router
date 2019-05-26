@@ -99,7 +99,7 @@ h4.recovery{
 .server-box{
     position:relative;
     width: 110px;
-    min-height: 300px;
+    min-height: 100px;
     text-align:center;
     color:#dc3545;
 }
@@ -109,6 +109,15 @@ h4.recovery{
     color:#666;
     text-align:center;
     width:100%;
+}
+.server-info-extra{
+    font-size:0.8em;
+    text-align:left;
+    white-space: pre;
+    color:#666;
+    visibility: hidden;
+    font-family: Consolas,monospace; 
+    padding-top: 8px;
 }
 
 .server-up{
