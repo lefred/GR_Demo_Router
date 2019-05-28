@@ -23,6 +23,7 @@ if ($result) {
 
 }
 
+$mysqli_r->close();
 echo json_encode($results);
 
 ?>
