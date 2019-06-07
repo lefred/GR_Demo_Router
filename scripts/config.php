@@ -1,13 +1,11 @@
 <?php
 
-// Router connections
+// Servers connections
 
 $user="clusteradmin";
 $password="fred";
 $database="clusterdemo";
 $host="127.0.0.1";
-$port_r=6447;
-$port_w=6446;
 
 if (isset($_GET['server'])) {
     $db="sys";
@@ -30,24 +28,5 @@ if (isset($_GET['server'])) {
     if (!($mysqli_server->real_connect($host, $user, $password, $db, $port))) {
         unset($mysqli_server);
     }
-} else {
-
-    $mysqli_r = mysqli_init();
-    if (!$mysqli_r) {
-    die('mysql_init failed!');
-    }
-    if (!$mysqli_r->options(MYSQLI_OPT_CONNECT_TIMEOUT,3)) {
-    die('Setting MYSQLI_OPT_CONNECT_TIMEOUT failed');
-    }
-    $mysqli_r->real_connect($host, $user, $password, $database, $port_r); 
-    
-    $mysqli_w = mysqli_init();
-    if (!$mysqli_w) {
-    die('mysql_init failed!');
-    }
-    if (!$mysqli_w->options(MYSQLI_OPT_CONNECT_TIMEOUT,3)) {
-    die('Setting MYSQLI_OPT_CONNECT_TIMEOUT failed');
-    }
-    $mysqli_w->real_connect($host, $user, $password, $database, $port_w); 
-}    
+} 
 ?>

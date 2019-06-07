@@ -1,6 +1,6 @@
 <?php
 
-require('config.php');
+require('config_read.php');
 $sql = "select *, @@hostname 'read_from' from demo order by entered desc limit 1;";
 $time = microtime(true);
 $result = $mysqli_r->query($sql);

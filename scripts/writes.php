@@ -1,6 +1,6 @@
 <?php
 
-require('config.php');
+require('config_write.php');
 $sql = "insert into demo values(0,@@hostname,now());";
 $time = microtime(true);
 $result = $mysqli_w->query($sql);
