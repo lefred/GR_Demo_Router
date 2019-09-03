@@ -45,10 +45,10 @@
     </section>
 
     <section id="server-dock">
-        <article id="mysql4" class="server-box server-down">
+        <article id="mysql1" class="server-box server-down">
             <span class="fas fa-server"></span>
             <div class="server-info">
-              mysql4 
+              mysql1 
             </div>
         </article>
         <article id="mysql2" class="server-box server-down">

@@ -3,11 +3,11 @@
 // Router connections
 
 $user="clusteradmin";
-$password="mysql";
+$password="fred";
 $database="clusterdemo";
 $host="mysql1";
 $port_r=6447;
-$port_w=3306;
+$port_w=6446;
 
 
 $mysqli_r = mysqli_init();
@@ -32,9 +32,9 @@ $mysqli_w->real_connect($host, $user, $password, $database, $port_w);
 // Each servers
 
 $user_admin = "clusteradmin";
-$pwd_admin = "mysql";
+$pwd_admin = "fred";
 $db="sys";
-$host1 = "mysql4";
+$host1 = "mysql1";
 $host2 = "mysql2";
 $host3 = "mysql3";
 $port1 = 3306;

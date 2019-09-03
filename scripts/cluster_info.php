@@ -21,7 +21,7 @@ $sql = "select member_role, member_state, member_version, @@read_only,
        JOIN performance_schema.replication_group_member_stats 
 			 USING(member_id) where member_id=@@global.server_uuid;";
 
-if ($_GET['server'] == "mysql4") {
+if ($_GET['server'] == "mysql1") {
 	if ($mysqli_1) {
 		$result = $mysqli_1->query($sql);
 	}
