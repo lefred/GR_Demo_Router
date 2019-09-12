@@ -6,9 +6,12 @@ $user="clusteradmin";
 $password="fred";
 $database="clusterdemo";
 $host="mysql1";
-$port_r=6447;
-$port_w=6446;
-
+#$port_r=6447;
+#$port_w=6446;
+$port_r=6033;
+$port_w=6033;
+$user_w="writer";
+$user_r="reader";
 
 $mysqli_r = mysqli_init();
 if (!$mysqli_r) {
@@ -17,7 +20,7 @@ if (!$mysqli_r) {
 if (!$mysqli_r->options(MYSQLI_OPT_CONNECT_TIMEOUT,3)) {
    die('Setting MYSQLI_OPT_CONNECT_TIMEOUT failed');
 }
-$mysqli_r->real_connect($host, $user, $password, $database, $port_r); 
+$mysqli_r->real_connect($host, $user_r, $password, $database, $port_r); 
  
 $mysqli_w = mysqli_init();
 if (!$mysqli_w) {
@@ -26,7 +29,7 @@ if (!$mysqli_w) {
 if (!$mysqli_w->options(MYSQLI_OPT_CONNECT_TIMEOUT,3)) {
    die('Setting MYSQLI_OPT_CONNECT_TIMEOUT failed');
 }
-$mysqli_w->real_connect($host, $user, $password, $database, $port_w); 
+$mysqli_w->real_connect($host, $user_w, $password, $database, $port_w); 
  
 
 // Each servers
